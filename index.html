@@ -7,6 +7,13 @@
   <link rel="shortcut icon" href="./images/heart.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    #yesSound{
+      display: none;
+    }
+    #noSound{
+      display: none;
+    }
+
     .gradient-background {
       background: rgb(255, 208, 229);
       background: linear-gradient(180deg, rgba(255, 208, 229, 1) 0%, rgba(255, 232, 242, 1) 36%, rgba(255, 255, 255, 1) 100%);
@@ -31,9 +38,9 @@
 </head>
 <body class="gradient-background">
   
-<audio loop autoplay>
-  <source src="kyatummile-1.mp3" type="audio/mp3">
-</audio>
+<audio id="yesSound" src="tum_kya_mile.mp3" controls autoplay loop> </audio>
+<audio id="noSound" src="dontSayno.mp3"> </audio>
+
 
   <div class="flex items-center justify-center h-screen">
     <div class="flex flex-col items-center p-4">
@@ -51,7 +58,6 @@
       </div>
     </div>
   </div>
-
   <script type="module">
     import confetti from 'https://cdn.skypack.dev/canvas-confetti';
     const yesButton = document.getElementById('yesButton');
@@ -59,6 +65,8 @@
     const imageDisplay = document.getElementById('imageDisplay');
     const valentineQuestion = document.getElementById('valentineQuestion');
     const responseButtons = document.getElementById('responseButtons');
+    const yesSound = document.getElementById('yesSound');
+    const noSound = document.getElementById('noSound');
   
     let noClickCount = 0;
     let buttonHeight = 48; // Starting height in pixels
@@ -85,6 +93,7 @@
         yesButton.style.width = `${buttonWidth}px`;
         yesButton.style.fontSize = `${fontSize}px`; // Update font size
         if (noClickCount < 6) {
+          noSound.play();
           noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
         }
       }
@@ -92,7 +101,9 @@
   
     yesButton.addEventListener('click', () => {
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
-      valentineQuestion.textContent = "Yayyy!! :3"; // Change the question text
+      valentineQuestion.textContent = "Yayyy!! :3";
+       // Change the question text
+       yesSound.play();
       responseButtons.style.display = 'none'; // Hide both buttons
       confetti(); // Trigger confetti animation
     });
