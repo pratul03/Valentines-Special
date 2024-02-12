@@ -67,7 +67,7 @@
     const responseButtons = document.getElementById('responseButtons');
     const yesSound = document.getElementById('yesSound');
     const noSound = document.getElementById('noSound');
-  
+    
     let noClickCount = 0;
     let buttonHeight = 48; // Starting height in pixels
     let buttonWidth = 80;
@@ -84,6 +84,7 @@
   
     noButton.addEventListener('click', function() {
       if (noClickCount < 5) {
+        noSound.play();
         noClickCount++;
         imageDisplay.src = imagePaths[noClickCount];
         buttonHeight += 35; // Increase height by 5px on each click
@@ -93,13 +94,13 @@
         yesButton.style.width = `${buttonWidth}px`;
         yesButton.style.fontSize = `${fontSize}px`; // Update font size
         if (noClickCount < 6) {
-          noSound.play();
           noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
         }
       }
     });
   
     yesButton.addEventListener('click', () => {
+      noSound.pause();
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
       valentineQuestion.textContent = "Yayyy!! :3";
        // Change the question text
