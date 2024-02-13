@@ -13,6 +13,18 @@
     #noSound{
       display: none;
     }
+    #noSound_1{
+      display: none;
+    }
+    #noSound_2{
+      display: none;
+    }
+    #noSound_3{
+      display: none;
+    }
+    #noSound_4{
+      display: none;
+    }
 
     .gradient-background {
       background: rgb(255, 208, 229);
@@ -38,8 +50,12 @@
 </head>
 <body class="gradient-background">
   
-<audio id="yesSound" src="tum_kya_mile.mp3" controls autoplay loop> </audio>
-<audio id="noSound" src="dontSayno.mp3"> </audio>
+<audio id="yesSound" src="tum_kya_mile.mp3" preload="auto" autoplay loop> </audio>
+<audio id="noSound" src="dontSayno.mp3" preload="auto" autoplay loop > </audio>
+<audio id="noSound_1" src="oMujheChhodKeJoTumJaaoge.mp3" preload="auto" autoplay loop> </audio>
+<audio id="noSound_2" src="noSound_2.mp3" preload="auto" autoplay loop> </audio>
+<audio id="noSound_3" src="noSound_3.mp3" preload="auto" autoplay loop> </audio>
+<audio id="noSound_4" src="noSound_4.mp3" preload="auto" autoplay loop> </audio>
 
 
   <div class="flex items-center justify-center h-screen">
@@ -67,6 +83,10 @@
     const responseButtons = document.getElementById('responseButtons');
     const yesSound = document.getElementById('yesSound');
     const noSound = document.getElementById('noSound');
+    const noSound_1 = document.getElementById('noSound_1');
+    const noSound_2 = document.getElementById('noSound_2');
+    const noSound_3 = document.getElementById('noSound_3');
+    const noSound_4 = document.getElementById('noSound_4');
     
     let noClickCount = 0;
     let buttonHeight = 48; // Starting height in pixels
@@ -84,7 +104,25 @@
   
     noButton.addEventListener('click', function() {
       if (noClickCount < 5) {
-        noSound.play();
+        if(noClickCount == 0){
+          noSound.play();
+        }
+        else if(noClickCount == 1){
+          noSound_4.play();
+          noSound.pause();
+        }
+        else if(noClickCount == 2){
+          noSound_3.play();
+          noSound_4.pause();
+        }
+        else if(noClickCount == 3){
+          noSound_2.play();
+          noSound_3.pause();
+        }
+        else if(noClickCount == 4){
+          noSound_1.play();
+          noSound_2.pause();
+        }
         noClickCount++;
         imageDisplay.src = imagePaths[noClickCount];
         buttonHeight += 35; // Increase height by 5px on each click
@@ -101,6 +139,9 @@
   
     yesButton.addEventListener('click', () => {
       noSound.pause();
+      noSound_1.pause();
+      noSound_2.pause();
+      noSound_3.pause();
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
       valentineQuestion.textContent = "Yayyy!! :3";
        // Change the question text
